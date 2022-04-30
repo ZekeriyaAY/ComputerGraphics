@@ -1,9 +1,23 @@
+## ***031990037 Zekeriya AY - Bilgisayar Grafikleri Ödev 4***
+
+NOT: Uğraşmama rağmen ödevi yapamadım. Yapabildiğim kadarını eklemek istedim.
+
+```makefile
+# Makefile
+
+build:
+	g++ 3d_bezier_curves.cpp -o 3d_bezier_curves -lglut -lGLU -lGL
+	./3d_bezier_curves
+```
+
+```cpp
+// 3d_bezier_curves.cpp
+
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <stdlib.h>
 #include <iostream>
 #include <GL/glut.h>
-// #include <math.h>
 // #include <GLFW/glfw3.h>
 
 using namespace std;
@@ -11,16 +25,14 @@ using namespace std;
 GLfloat ctrlpoints[4][3] = {
     {-2.0, 4.0, 3.0}, {4.0, -3.0, 2.0}, {-4.0, -2.0, 0.0}, {2.0, 2.0, -2.0}};
 
-void init(void)
-{
+void init(void) {
     glClearColor(0.0, 0.0, 0.0, 0.0);
     glShadeModel(GL_FLAT);
     glMap1f(GL_MAP1_VERTEX_3, 0.0, 1.0, 3, 4, &ctrlpoints[0][0]);
     glEnable(GL_MAP1_VERTEX_3);
 }
 
-void display(void)
-{
+void display(void) {
     gluLookAt(0.0, 0.0, -4.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 
     glClear(GL_COLOR_BUFFER_BIT);
@@ -39,8 +51,7 @@ void display(void)
     glFlush();
 }
 
-void reshape(int w, int h)
-{
+void reshape(int w, int h) {
     glViewport(0, 0, (GLsizei)w, (GLsizei)h);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -54,8 +65,7 @@ void reshape(int w, int h)
     glLoadIdentity();
 }
 
-void processNormalKeys(unsigned char key, int x, int y)
-{
+void processNormalKeys(unsigned char key, int x, int y) {
     if (key == 27) // ESC = exit
         exit(0);
     else if (key == 'R')
@@ -71,8 +81,7 @@ void processNormalKeys(unsigned char key, int x, int y)
     }
 }
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
     srand(time(0));
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
@@ -80,13 +89,11 @@ int main(int argc, char **argv)
     glutInitWindowPosition(100, 100);
     glutCreateWindow(argv[0]);
     init();
-
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
     // glutIdleFunc(display);
-
     glutKeyboardFunc(processNormalKeys);
-
     glutMainLoop();
     return 0;
 }
+```
